@@ -45,16 +45,16 @@ export default function Home() {
     <div className="app-layout">
       {/* Header */}
       <header className="app-header">
-        <div className="header-brand flex items-center gap-2"> 
+        <div className="header-brand flex items-center gap-2">
 
           <div className="brand-logo-container relative w-8 h-8">
             <Image
-              src="/logo.png"   
+              src="/logo.png"
               alt="FIFA Live TV Logo"
-              width={32}       
+              width={32}
               height={32}
               className="object-contain"
-              priority           
+              priority
             />
           </div>
 
@@ -111,9 +111,12 @@ export default function Home() {
 
         {/* Main Player Area */}
         <main className="main-content">
+          <VideoPlayer
+            channel={activeChannel}
+            onUrlFallback={handleUrlFallback}
+          />
           <div className="now-playing-bar">
             <div className="np-logo-wrap">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={activeChannel.logo}
                 alt={activeChannel.name}
@@ -128,49 +131,6 @@ export default function Home() {
                 <span className="np-tag np-tag--quality">{activeChannel.quality}</span>
               </div>
             </div>
-          </div>
-
-          <VideoPlayer
-            channel={activeChannel}
-            onUrlFallback={handleUrlFallback}
-          />
-
-          {/* EPG / Info Panel */}
-          <div className="epg-panel">
-            <div className="epg-header">
-              <h3>📺 Programme Guide</h3>
-              <span className="epg-live-label">LIVE NOW</span>
-            </div>
-            <div className="epg-grid">
-              <div className="epg-item epg-item--active">
-                <div className="epg-time">Now</div>
-                <div className="epg-title">
-                  {activeChannel.group === "Sports"
-                    ? "⚽ Live Football Coverage"
-                    : "📰 Live News Broadcast"}
-                </div>
-                <div className="epg-bar">
-                  <div className="epg-progress" style={{ width: "80%" }} />
-                </div>
-              </div>
-              <div className="epg-item">
-                <div className="epg-time">Next</div>
-                <div className="epg-title">
-                  {activeChannel.group === "Sports"
-                    ? "🏆 Match Highlights & Analysis"
-                    : "🌍 World News Update"}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Stream sources */}
-          <div className="sources-panel">
-            <p className="sources-label">
-              📡 Stream sources: {activeChannel.urls.length} available
-              {activeChannel.activeUrlIndex > 0 &&
-                ` · Using backup #${activeChannel.activeUrlIndex + 1}`}
-            </p>
           </div>
         </main>
       </div>

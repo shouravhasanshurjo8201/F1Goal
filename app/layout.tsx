@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "FIFA Live TV - 2026",
+  title: "FIFA Live Matches - 2026",
   description: "Watch FIFA matches live",
   icons: {
     icon: [
