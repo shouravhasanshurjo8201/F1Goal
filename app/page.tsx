@@ -6,6 +6,7 @@ import ChannelCard from "@/components/ChannelCard";
 import SearchBar from "@/components/SearchBar";
 import { CHANNELS } from "@/lib/channelData";
 import { Channel } from "@/types/channel";
+import Image from "next/image";
 
 const GROUPS = ["All", "Sports", "News"];
 
@@ -44,17 +45,28 @@ export default function Home() {
     <div className="app-layout">
       {/* Header */}
       <header className="app-header">
-        <div className="header-brand">
-          <span className="brand-icon">⚽</span>
-          <h1 className="brand-title">FIFA Live TV</h1>
+        <div className="header-brand flex items-center gap-2"> 
+
+          <div className="brand-logo-container relative w-8 h-8">
+            <Image
+              src="/logo.png"   
+              alt="FIFA Live TV Logo"
+              width={32}       
+              height={32}
+              className="object-contain"
+              priority           
+            />
+          </div>
+
+          <h1 className="brand-title">FIFA Live Mach</h1>
           <span className="brand-badge">2026</span>
         </div>
+
         <div className="header-live">
           <span className="pulse-dot" />
           <span>LIVE</span>
         </div>
       </header>
-
       <div className="app-body">
         {/* Sidebar */}
         <aside className="sidebar">
@@ -138,7 +150,7 @@ export default function Home() {
                     : "📰 Live News Broadcast"}
                 </div>
                 <div className="epg-bar">
-                  <div className="epg-progress" style={{ width: "40%" }} />
+                  <div className="epg-progress" style={{ width: "80%" }} />
                 </div>
               </div>
               <div className="epg-item">
