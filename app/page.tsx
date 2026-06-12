@@ -1,65 +1,167 @@
-import Image from "next/image";
+"use client";
+
+import { useState, useCallback } from "react";
+import VideoPlayer from "@/components/VideoPlayer";
+import ChannelCard from "@/components/ChannelCard";
+import SearchBar from "@/components/SearchBar";
+import { CHANNELS } from "@/lib/channelData";
+import { Channel } from "@/types/channel";
+
+const GROUPS = ["All", "Sports", "News"];
 
 export default function Home() {
+  const [channels, setChannels] = useState<Channel[]>(CHANNELS);
+  const [activeChannel, setActiveChannel] = useState<Channel>(CHANNELS[0]);
+  const [search, setSearch] = useState("");
+  const [activeGroup, setActiveGroup] = useState("All");
+
+  const handleUrlFallback = useCallback((channelId: string) => {
+    setChannels((prev) =>
+      prev.map((ch) => {
+        if (ch.id !== channelId) return ch;
+        const next = ch.activeUrlIndex + 1;
+        if (next < ch.urls.length) {
+          const updated = { ...ch, activeUrlIndex: next };
+          // Also update activeChannel if it's the one playing
+          setActiveChannel((cur) => (cur.id === channelId ? updated : cur));
+          return updated;
+        }
+        return ch;
+      })
+    );
+  }, []);
+
+  const filteredChannels = channels.filter((ch) => {
+    const matchesGroup = activeGroup === "All" || ch.group === activeGroup;
+    const matchesSearch =
+      !search ||
+      ch.name.toLowerCase().includes(search.toLowerCase()) ||
+      ch.language?.toLowerCase().includes(search.toLowerCase());
+    return matchesGroup && matchesSearch;
+  });
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="app-layout">
+      {/* Header */}
+      <header className="app-header">
+        <div className="header-brand">
+          <span className="brand-icon">⚽</span>
+          <h1 className="brand-title">FIFA Live TV</h1>
+          <span className="brand-badge">2026</span>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+        <div className="header-live">
+          <span className="pulse-dot" />
+          <span>LIVE</span>
+        </div>
+      </header>
+
+      <div className="app-body">
+        {/* Sidebar */}
+        <aside className="sidebar">
+          <div className="sidebar-top">
+            <SearchBar
+              value={search}
+              onChange={setSearch}
+              placeholder="Search channels..."
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+            <div className="group-tabs">
+              {GROUPS.map((g) => (
+                <button
+                  key={g}
+                  className={`group-tab ${activeGroup === g ? "group-tab--active" : ""}`}
+                  onClick={() => setActiveGroup(g)}
+                >
+                  {g}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="channel-list">
+            {filteredChannels.length === 0 ? (
+              <p className="no-results">No channels found</p>
+            ) : (
+              filteredChannels.map((ch) => (
+                <ChannelCard
+                  key={ch.id}
+                  channel={ch}
+                  isActive={activeChannel.id === ch.id}
+                  onClick={() => setActiveChannel(ch)}
+                />
+              ))
+            )}
+          </div>
+
+          <div className="sidebar-footer">
+            <p>{filteredChannels.length} channels available</p>
+          </div>
+        </aside>
+
+        {/* Main Player Area */}
+        <main className="main-content">
+          <div className="now-playing-bar">
+            <div className="np-logo-wrap">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={activeChannel.logo}
+                alt={activeChannel.name}
+                className="np-logo"
+              />
+            </div>
+            <div className="np-info">
+              <h2 className="np-name">{activeChannel.name}</h2>
+              <div className="np-meta">
+                <span className="np-tag">{activeChannel.group}</span>
+                <span className="np-tag">{activeChannel.language}</span>
+                <span className="np-tag np-tag--quality">{activeChannel.quality}</span>
+              </div>
+            </div>
+          </div>
+
+          <VideoPlayer
+            channel={activeChannel}
+            onUrlFallback={handleUrlFallback}
+          />
+
+          {/* EPG / Info Panel */}
+          <div className="epg-panel">
+            <div className="epg-header">
+              <h3>📺 Programme Guide</h3>
+              <span className="epg-live-label">LIVE NOW</span>
+            </div>
+            <div className="epg-grid">
+              <div className="epg-item epg-item--active">
+                <div className="epg-time">Now</div>
+                <div className="epg-title">
+                  {activeChannel.group === "Sports"
+                    ? "⚽ Live Football Coverage"
+                    : "📰 Live News Broadcast"}
+                </div>
+                <div className="epg-bar">
+                  <div className="epg-progress" style={{ width: "40%" }} />
+                </div>
+              </div>
+              <div className="epg-item">
+                <div className="epg-time">Next</div>
+                <div className="epg-title">
+                  {activeChannel.group === "Sports"
+                    ? "🏆 Match Highlights & Analysis"
+                    : "🌍 World News Update"}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Stream sources */}
+          <div className="sources-panel">
+            <p className="sources-label">
+              📡 Stream sources: {activeChannel.urls.length} available
+              {activeChannel.activeUrlIndex > 0 &&
+                ` · Using backup #${activeChannel.activeUrlIndex + 1}`}
+            </p>
+          </div>
+        </main>
+      </div>
     </div>
   );
 }
