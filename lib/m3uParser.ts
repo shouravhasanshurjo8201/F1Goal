@@ -39,7 +39,6 @@ export function parseM3U(content: string): Channel[] {
         .filter(Boolean);
 
     const channelMap = new Map<string, Channel>();
-
     let i = 0;
 
     while (i < lines.length) {
@@ -83,15 +82,12 @@ export function parseM3U(content: string): Channel[] {
                         language: extractLanguage(tvgId),
                     });
                 }
-
                 i += 2;
                 continue;
             }
         }
-
         i++;
     }
-
     return Array.from(channelMap.values());
 }
 
@@ -103,9 +99,7 @@ export function groupChannels(
         if (!acc[channel.group]) {
             acc[channel.group] = [];
         }
-
         acc[channel.group].push(channel);
-
         return acc;
     }, {});
 }

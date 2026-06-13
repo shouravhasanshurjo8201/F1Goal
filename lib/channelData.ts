@@ -2,20 +2,6 @@ import { Channel } from "@/types/channel";
 
 export const CHANNELS: Channel[] = [
     {
-        id: "tsports_bd",
-        name: "T Sports",
-        logo: "https://i.imgur.com/2JzlorD.png",
-        group: "Sports",
-        tvgId: "TSports.bd@SD",
-        language: "Bengali",
-        quality: "720p",
-        activeUrlIndex: 0,
-        urls: [
-            "https://tvsen7.aynaott.com/tsports-hd/index.m3u8",
-            "https://tvsen7.aynaott.com/tsportsfhd/index.m3u8",
-        ],
-    },
-    {
         id: "somoy_news_bd",
         name: "Somoy News TV",
         logo: "https://i.imgur.com/i54AQic.png",
@@ -28,6 +14,20 @@ export const CHANNELS: Channel[] = [
             "https://tvsen6.aynaott.com/somoytv/index.m3u8",
             "https://bozztv.com/rongo/rongo-somoy/index.m3u8",
             "https://owrcovcrpy.gpcdn.net/bpk-tv/1702/output/index.m3u8",
+        ],
+    },
+    {
+        id: "tsports_bd",
+        name: "T Sports",
+        logo: "https://i.imgur.com/2JzlorD.png",
+        group: "Sports",
+        tvgId: "TSports.bd@SD",
+        language: "Bengali",
+        quality: "720p",
+        activeUrlIndex: 0,
+        urls: [
+            "https://tvsen7.aynaott.com/tsports-hd/index.m3u8",
+            "https://tvsen7.aynaott.com/tsportsfhd/index.m3u8",
         ],
     },
     {
