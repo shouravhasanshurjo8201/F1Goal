@@ -115,7 +115,7 @@ export default function VideoPlayer({ channel, onUrlFallback }: VideoPlayerProps
 
             <video
                 ref={videoRef}
-                className="w-full h-full object-cover block"
+                className="video-element"
                 playsInline
                 muted={isMuted}
             />
