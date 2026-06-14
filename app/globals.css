@@ -1,5 +1,46 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Barlow+Condensed:wght@600;700;900&display=swap");
 
+/* ── Tailwind / Direct Utilities Layer Injection ── */
+@layer utilities {
+
+  /* Dynamic schedule scroll tracking custom bar logic */
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari and Opera */
+  }
+
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: #1e2130 transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 3px;
+    height: 3px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 9px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: #1e2130;
+    border-radius: 9px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: #2d324a;
+  }
+}
+
 /* ── Tokens ── */
 :root {
   --bg-base: #0a0c10;
@@ -66,6 +107,7 @@ body {
 
 .brand-icon {
   font-size: 22px;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
 }
 
 .brand-title {
@@ -75,6 +117,9 @@ body {
   letter-spacing: 0.04em;
   color: var(--text-primary);
   text-transform: uppercase;
+  background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .brand-badge {
@@ -85,6 +130,7 @@ body {
   padding: 2px 7px;
   border-radius: 4px;
   letter-spacing: 0.05em;
+  box-shadow: 0 4px 10px var(--accent-glow);
 }
 
 .header-live {
@@ -166,7 +212,7 @@ body {
   font-size: 13px;
   font-family: var(--font-body);
   outline: none;
-  transition: border-color 0.15s;
+  transition: all 0.2s ease;
 }
 
 .search-input::placeholder {
@@ -175,6 +221,7 @@ body {
 
 .search-input:focus {
   border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
 }
 
 .search-clear {
@@ -209,12 +256,14 @@ body {
 .group-tab:hover {
   color: var(--text-primary);
   border-color: rgba(255, 255, 255, 0.15);
+  background: var(--bg-hover);
 }
 
 .group-tab--active {
   background: var(--accent);
   border-color: var(--accent);
   color: white;
+  box-shadow: 0 4px 12px var(--accent-glow);
 }
 
 .channel-list {
@@ -282,6 +331,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 1px solid var(--border);
 }
 
 .channel-logo {
@@ -315,6 +365,9 @@ body {
 .channel-quality {
   font-size: 10px;
   color: var(--text-muted);
+  background: var(--bg-base);
+  padding: 1px 6px;
+  border-radius: 4px;
   font-weight: 500;
 }
 
@@ -324,6 +377,7 @@ body {
   border-radius: 50%;
   background: var(--green-live);
   flex-shrink: 0;
+  box-shadow: 0 0 8px var(--green-live);
   animation: pulse 1.4s ease-in-out infinite;
 }
 
@@ -332,6 +386,7 @@ body {
   border-top: 1px solid var(--border);
   font-size: 11px;
   color: var(--text-muted);
+  font-weight: 500;
 }
 
 /* ── Main Content ── */
@@ -355,6 +410,7 @@ body {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 12px 16px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
 }
 
 .np-logo-wrap {
@@ -366,6 +422,7 @@ body {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  border: 1px solid var(--border);
 }
 
 .np-logo {
@@ -405,6 +462,7 @@ body {
 .np-tag--quality {
   background: rgba(245, 197, 24, 0.15);
   color: var(--gold);
+  border: 1px solid rgba(245, 197, 24, 0.15);
 }
 
 /* ── Video Container ── */
@@ -416,6 +474,7 @@ body {
   border-radius: var(--radius);
   overflow: hidden;
   border: 1px solid var(--border);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
 }
 
 .video-element {
@@ -433,6 +492,7 @@ body {
   align-items: center;
   justify-content: center;
   background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
   gap: 12px;
   z-index: 2;
 }
@@ -498,6 +558,7 @@ body {
   padding: 3px 8px;
   border-radius: 4px;
   letter-spacing: 0.08em;
+  box-shadow: 0 4px 10px rgba(220, 38, 38, 0.25);
 }
 
 .live-dot {
@@ -516,12 +577,13 @@ body {
 
 .ctrl-btn {
   background: rgba(255, 255, 255, 0.15);
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 6px;
   padding: 5px 9px;
+  color: white;
   cursor: pointer;
   font-size: 16px;
-  transition: background 0.15s;
+  transition: all 0.15s ease;
 }
 
 .ctrl-btn:hover {
@@ -531,6 +593,9 @@ body {
 .source-info {
   font-size: 11px;
   color: var(--text-secondary);
+  background: rgba(0, 0, 0, 0.4);
+  padding: 4px 8px;
+  border-radius: 6px;
 }
 
 /* ── EPG Panel ── */
@@ -539,6 +604,7 @@ body {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 14px 16px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
 }
 
 .epg-header {
@@ -576,6 +642,7 @@ body {
   border-radius: 6px;
   background: var(--bg-card);
   border: 1px solid transparent;
+  transition: all 0.2s ease;
 }
 
 .epg-item--active {
@@ -658,5 +725,16 @@ body {
 
   .main-content {
     overflow: visible;
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .app-header {
+    height: 56px;
+    padding: 0 16px;
+  }
+
+  .brand-title {
+    font-size: 20px;
   }
 }
