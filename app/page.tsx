@@ -44,33 +44,7 @@ export default function Home() {
 
   return (
     <div className="app-layout">
-      {/* Header */}
-      {/* <header className="app-header">
-        <div className="header-brand flex items-center gap-2">
-
-          <div className="brand-logo-container relative w-8 h-8">
-            <Image
-              src="/logo.png"
-              alt="FIFA Live TV Logo"
-              width={32}
-              height={32}
-              className="object-contain"
-              priority
-            />
-          </div>
-
-          <h1 className="brand-title">FIFA Live Mach</h1>
-          <span className="brand-badge">2026</span>
-        </div>
-
-        <div className="header-live">
-          <span className="pulse-dot" />
-          <span>LIVE</span>
-        </div>
-      </header> */}
-
-      {/* <Header /> */}
-
+      <Header />
 
       <div className="app-body">
         {/* Sidebar */}
