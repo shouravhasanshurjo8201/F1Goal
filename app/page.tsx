@@ -7,6 +7,7 @@ import SearchBar from "@/components/SearchBar";
 import { CHANNELS } from "@/lib/channelData";
 import { Channel } from "@/types/channel";
 import Image from "next/image";
+import Header from "@/components/Header";
 
 const GROUPS = ["All", "Sports", "News"];
 
@@ -68,34 +69,7 @@ export default function Home() {
         </div>
       </header> */}
 
-      <header className="app-header flex items-center justify-between px-6 py-4 bg-[#0d0f17] border-b border-slate-800/80 rounded-xl mb-6 shrink-0 z-10">
-        {/* Left Side: Brand Logo & Title */}
-        <div className="header-brand flex items-center gap-2">
-          <div className="brand-logo-container relative w-8 h-8 bg-red-600 rounded-lg flex items-center justify-center font-black shadow-md shadow-red-900/40">
-            🏆
-          </div>
-          <h1 className="brand-title text-base font-black tracking-wide bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent uppercase">
-            Ajker Khela
-          </h1>
-          <span className="brand-badge text-[10px] bg-red-600/10 text-red-500 font-extrabold border border-red-500/20 px-1.5 py-0.5 rounded ml-1 tracking-wider flex items-center gap-1">
-            <span className="pulse-dot w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
-            LIVE
-          </span>
-        </div>
-
-        {/* Right Side: Navigation Tabs (Matched from Images) */}
-        <div className="flex items-center gap-6 text-xs font-bold tracking-wide text-slate-400">
-          <span className="hover:text-white cursor-pointer transition-colors">
-            Live Now
-          </span>
-          <span className="text-red-500 border-b-2 border-red-500 pb-1 cursor-pointer">
-            Schedule
-          </span>
-          <span className="hover:text-white cursor-pointer transition-colors">
-            Highlights
-          </span>
-        </div>
-      </header>
+      {/* <Header /> */}
 
 
       <div className="app-body">
