@@ -1,6 +1,4 @@
 "use client";
-
-import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
@@ -33,7 +31,7 @@ export default function Header() {
                         priority
                     />
                 </div>
-                <h1 className="brand-title">FIFA Live Mach</h1>
+                <h1 className="brand-title">FIFA Live Match</h1>
                 <span className="brand-badge">2026</span>
             </div>
 
@@ -41,7 +39,6 @@ export default function Header() {
             <nav className="group-tabs-nav">
                 {navItems.map((item) => {
                     const isActive = pathname === item.path;
-
                     return (
                         <Link key={item.path} href={item.path} passHref>
                             <button
