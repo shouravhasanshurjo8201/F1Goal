@@ -14,6 +14,7 @@ export default function Header() {
     const pathname = usePathname();
 
     const navItems: NavItem[] = [
+        { label: "Live Match", path: "/" },
         { label: "Schedule", path: "/schedule" },
         { label: "Highlights", path: "/highlights" },
     ];

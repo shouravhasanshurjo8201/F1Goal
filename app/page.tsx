@@ -6,8 +6,6 @@ import ChannelCard from "@/components/ChannelCard";
 import SearchBar from "@/components/SearchBar";
 import { CHANNELS } from "@/lib/channelData";
 import { Channel } from "@/types/channel";
-import Image from "next/image";
-import Header from "@/components/Header";
 
 const GROUPS = ["All", "Sports", "News"];
 
@@ -44,8 +42,6 @@ export default function Home() {
 
   return (
     <div className="app-layout">
-      <Header />
-
       <div className="app-body">
         {/* Sidebar */}
         <aside className="sidebar">
