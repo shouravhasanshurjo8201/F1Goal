@@ -397,6 +397,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 14px;
+  height: 100vh;
   scrollbar-width: thin;
   scrollbar-color: var(--bg-hover) transparent;
 }
