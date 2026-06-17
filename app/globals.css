@@ -574,19 +574,21 @@ body {
   display: flex;
   gap: 6px;
   margin-left: auto;
-  
+
 }
+
 .nav-btn {
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 6px;
   padding: 5px 9px;
-    margin-left: 10px;
+  margin-left: 10px;
   color: white;
   cursor: pointer;
   font-size: 12px;
   transition: all 0.15s ease;
 }
+
 .ctrl-btn {
   background: rgba(255, 255, 255, 0.15);
   border: 1px solid rgba(255, 255, 255, 0.05);
@@ -756,16 +758,18 @@ body {
 
 /* ── Schedule Page Custom Extensions ── */
 
-/* ডেট ফিল্টার বারের গ্লোবাল স্ক্রল হাইড ইনজেকশন */
 .scrollbar-none {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-}
-.scrollbar-none::-webkit-scrollbar {
-  display: none; /* Chrome, Safari and Opera */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
-/* ম্যাচ কার্ডের হোভার এবং টেক্সট অপ্টিমাইজেশন */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari and Opera */
+}
+
 .group:hover .group-hover\:border-red-500\/20 {
   border-color: rgba(239, 68, 68, 0.2) !important;
 }
@@ -774,15 +778,13 @@ body {
   color: #ef4444 !important;
 }
 
-/* ফন্ট স্মুথিং এবং টেক্সট ক্লিপ ফিক্স */
 .bg-clip-text {
   -webkit-background-clip: text;
   background-clip: text;
 }
 
-/* মোবাইল রেসপনসিভ প্যাডিং ও ওভারফ্লো ফিক্স */
 @media (max-width: 768px) {
   .main-content {
-    padding-bottom: 80px !important; /* নিচে অতিরিক্ত স্পেস যেন মোবাইল নেভিগেশনে ঢাকা না পড়ে */
+    padding-bottom: 80px !important;
   }
 }
