@@ -83,7 +83,7 @@ body {
 .app-layout {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 90vh;
   overflow: hidden;
 }
 
@@ -748,5 +748,41 @@ body {
 
   .brand-title {
     font-size: 20px;
+  }
+}
+
+
+
+
+/* ── Schedule Page Custom Extensions ── */
+
+/* ডেট ফিল্টার বারের গ্লোবাল স্ক্রল হাইড ইনজেকশন */
+.scrollbar-none {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+/* ম্যাচ কার্ডের হোভার এবং টেক্সট অপ্টিমাইজেশন */
+.group:hover .group-hover\:border-red-500\/20 {
+  border-color: rgba(239, 68, 68, 0.2) !important;
+}
+
+.group:hover .group-hover\:text-red-500 {
+  color: #ef4444 !important;
+}
+
+/* ফন্ট স্মুথিং এবং টেক্সট ক্লিপ ফিক্স */
+.bg-clip-text {
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* মোবাইল রেসপনসিভ প্যাডিং ও ওভারফ্লো ফিক্স */
+@media (max-width: 768px) {
+  .main-content {
+    padding-bottom: 80px !important; /* নিচে অতিরিক্ত স্পেস যেন মোবাইল নেভিগেশনে ঢাকা না পড়ে */
   }
 }
