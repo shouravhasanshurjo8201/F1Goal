@@ -31,64 +31,43 @@ function extractLanguage(tvgId: string): string {
     return languageMap[lang] ?? lang;
 }
 
-// Parse M3U playlist into Channel objects
+
 export function parseM3U(content: string): Channel[] {
     const lines = content
         .split("\n")
-        .map((line) => line.trim())
-        .filter(Boolean);
+        .map(l => l.trim())
+        .filter(l => l && !l.startsWith("#EXTM3U"));
 
-    const channelMap = new Map<string, Channel>();
-    let i = 0;
+    const channels: Channel[] = [];
+    let current: any = null;
 
-    while (i < lines.length) {
-        const line = lines[i];
+    for (const line of lines) {
+        if (line.startsWith("#EXTINF")) {
+            const tvgId = line.match(/tvg-id="([^"]*)"/)?.[1] ?? "";
+            const logo = line.match(/tvg-logo="([^"]*)"/)?.[1] ?? "";
+            const group = line.match(/group-title="([^"]*)"/)?.[1] ?? "Other";
+            const name = line.split(",")[1]?.trim() ?? "Unknown";
 
-        if (line.startsWith("#EXTINF:")) {
-            const tvgId =
-                line.match(/tvg-id="([^"]*)"/)?.[1] ?? "";
-
-            const logo =
-                line.match(/tvg-logo="([^"]*)"/)?.[1] ?? "";
-
-            const group =
-                line.match(/group-title="([^"]*)"/)?.[1] ?? "Other";
-
-            const fullName =
-                line.match(/,(.+)$/)?.[1]?.trim() ?? "Unknown";
-
-            // Remove quality suffixes from channel name
-            const baseName = fullName
-                .replace(/\s*\(\d+p\)\s*/g, "")
-                .trim();
-
-            const url = lines[i + 1];
-
-            if (url && !url.startsWith("#")) {
-                const key = `${baseName}__${tvgId}`;
-
-                if (channelMap.has(key)) {
-                    channelMap.get(key)!.urls.push(url);
-                } else {
-                    channelMap.set(key, {
-                        id: key.replace(/[^a-zA-Z0-9]/g, "_"),
-                        name: baseName,
-                        logo,
-                        group,
-                        tvgId,
-                        urls: [url],
-                        activeUrlIndex: 0,
-                        quality: extractQuality(fullName),
-                        language: extractLanguage(tvgId),
-                    });
-                }
-                i += 2;
-                continue;
-            }
+            current = {
+                id: tvgId + Math.random(),
+                name,
+                logo,
+                group,
+                tvgId,
+                urls: [],
+                activeUrlIndex: 0,
+                quality: "HD",
+                language: "English",
+            };
         }
-        i++;
+        else if (current && !line.startsWith("#")) {
+            current.urls.push(line);
+            channels.push(current);
+            current = null;
+        }
     }
-    return Array.from(channelMap.values());
+
+    return channels;
 }
 
 // Group channels by category
