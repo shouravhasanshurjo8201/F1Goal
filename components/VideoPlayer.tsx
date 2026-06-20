@@ -18,7 +18,7 @@ export default function VideoPlayer({
     const containerRef = useRef<HTMLDivElement>(null);
 
     const [status, setStatus] = useState<PlayerStatus>("loading");
-    const [isMuted, setIsMuted] = useState(true);
+    const [isMuted, setIsMuted] = useState(false);
     const [isFullscreen, setIsFullscreen] = useState(false);
 
     const currentUrl = channel.urls[channel.activeUrlIndex];
@@ -83,8 +83,8 @@ export default function VideoPlayer({
 
                         hls.on(Hls.Events.MANIFEST_PARSED, async () => {
                             try {
-                                video.muted = true;
-                                setIsMuted(true);
+                                video.muted = false;
+                                setIsMuted(false);
 
                                 await video.play();
                                 setStatus("playing");
@@ -108,8 +108,8 @@ export default function VideoPlayer({
 
                         video.onloadedmetadata = async () => {
                             try {
-                                video.muted = true;
-                                setIsMuted(true);
+                                video.muted = false;
+                                setIsMuted(false);
 
                                 await video.play();
                                 setStatus("playing");
@@ -125,8 +125,8 @@ export default function VideoPlayer({
 
                     video.onloadeddata = async () => {
                         try {
-                            video.muted = true;
-                            setIsMuted(true);
+                            video.muted = false;
+                            setIsMuted(false);
 
                             await video.play();
                             setStatus("playing");
