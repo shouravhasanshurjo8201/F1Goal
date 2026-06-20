@@ -1,49 +1,174 @@
 import { Channel } from "@/types/channel";
 
 export const CHANNELS: Channel[] = [
+
+
     {
         id: "somoy_news_bd",
-        name: "Somoy News TV",
+        name: "Somoy News",
         logo: "https://i.imgur.com/i54AQic.png",
         group: "News",
-        tvgId: "SomoyNewsTV.bd@SD",
+        tvgId: "SomoyNewsTV.bd",
         language: "Bengali",
-        quality: "1080p",
+        quality: "HD",
         activeUrlIndex: 0,
         urls: [
             "https://tvsen6.aynaott.com/somoytv/index.m3u8",
-            "https://bozztv.com/rongo/rongo-somoy/index.m3u8",
-            "https://owrcovcrpy.gpcdn.net/bpk-tv/1702/output/index.m3u8",
-        ],
+            "https://owrcovcrpy.gpcdn.net/bpk-tv/1702/output/index.m3u8"
+        ]
     },
+
+    {
+        id: "gtv_bd",
+        name: "GTV Bangladesh",
+        logo: "https://upload.wikimedia.org/wikipedia/en/3/3b/Gazi_TV_logo.png",
+        group: "Sports",
+        tvgId: "GTV.bd",
+        language: "Bengali",
+        quality: "HD",
+        activeUrlIndex: 0,
+        urls: [
+            "https://owrcovcrpy.gpcdn.net/bpk-tv/1701/output/index.m3u8"
+        ]
+    },
+
     {
         id: "tsports_bd",
         name: "T Sports",
         logo: "https://i.imgur.com/2JzlorD.png",
         group: "Sports",
-        tvgId: "TSports.bd@SD",
+        tvgId: "TSports.bd",
         language: "Bengali",
-        quality: "720p",
+        quality: "HD",
         activeUrlIndex: 0,
         urls: [
             "https://tvsen7.aynaott.com/tsports-hd/index.m3u8",
-            "https://tvsen7.aynaott.com/tsportsfhd/index.m3u8",
-        ],
+            "https://tvsen7.aynaott.com/tsportsfhd/index.m3u8"
+        ]
     },
+
     {
-        id: "tsn_ocho_ca",
+        id: "tsn_the_ocho",
         name: "TSN The Ocho",
         logo: "https://tvpnlogopus.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/CA1400003R3_20240709T002034SQUARE.png",
         group: "Sports",
-        tvgId: "TSNTheOcho.ca@SD",
+        tvgId: "TSNTheOcho.ca",
         language: "English",
-        quality: "1080p",
+        quality: "HD",
         activeUrlIndex: 0,
         urls: [
-            "https://d3pnbvng3bx2nj.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-rds8g35qfqrnv/TSN_The_Ocho.m3u8",
-        ],
+            "https://d3pnbvng3bx2nj.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-rds8g35qfqrnv/TSN_The_Ocho.m3u8"
+        ]
     },
-    
+
+    {
+        id: "fifa_plus",
+        name: "FIFA+",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/9/9c/FIFA%2B_%282025%29.svg",
+        group: "Sports",
+        tvgId: "FIFAPlus",
+        language: "English",
+        quality: "HD",
+        activeUrlIndex: 0,
+        urls: [
+            "https://jmp2.uk/plu-660bfca524e1d000085b6007.m3u8"
+        ]
+    }
+
+
+
+
+
+    // {
+    //     id: "tsports_bd",
+    //     name: "T Sports",
+    //     logo: "https://i.imgur.com/2JzlorD.png",
+    //     group: "Sports",
+    //     tvgId: "TSports.bd",
+    //     language: "Bengali",
+    //     quality: "HD",
+    //     activeUrlIndex: 0,
+    //     urls: [
+    //         "https://tvsen7.aynaott.com/tsports-hd/index.m3u8",
+    //         "https://tvsen7.aynaott.com/tsportsfhd/index.m3u8"
+    //     ]
+    // },
+    // {
+    //     id: "ptv_sports_pk",
+    //     name: "PTV Sports",
+    //     logo: "https://upload.wikimedia.org/wikipedia/en/5/5c/PTV_Sports.png",
+    //     group: "Sports",
+    //     tvgId: "PTVSports.pk",
+    //     language: "Urdu",
+    //     quality: "HD",
+    //     activeUrlIndex: 0,
+    //     urls: [
+    //         "https://cdn07isb.tamashaweb.com:8087/jazzauth/PTV_Sports_abr/playlist.m3u8"
+    //     ]
+    // },
+    // {
+    //     id: "gtv_bd",
+    //     name: "GTV Bangladesh",
+    //     logo: "https://upload.wikimedia.org/wikipedia/en/3/3b/Gazi_TV_logo.png",
+    //     group: "Sports",
+    //     tvgId: "GTV.bd",
+    //     language: "Bengali",
+    //     quality: "HD",
+    //     activeUrlIndex: 0,
+    //     urls: [
+    //         "https://owrcovcrpy.gpcdn.net/bpk-tv/1701/output/index.m3u8"
+    //     ]
+    // },
+
+
+
+
+    // {
+    //     id: "somoy_news_bd",
+    //     name: "Somoy News TV",
+    //     logo: "https://i.imgur.com/i54AQic.png",
+    //     group: "News",
+    //     tvgId: "SomoyNewsTV.bd@SD",
+    //     language: "Bengali",
+    //     quality: "1080p",
+    //     activeUrlIndex: 0,
+    //     urls: [
+    //         "https://tvsen6.aynaott.com/somoytv/index.m3u8",
+    //         "https://bozztv.com/rongo/rongo-somoy/index.m3u8",
+    //         "https://owrcovcrpy.gpcdn.net/bpk-tv/1702/output/index.m3u8",
+    //     ],
+    // },
+    // {
+    //     id: "tsports_bd",
+    //     name: "T Sports",
+    //     logo: "https://i.imgur.com/2JzlorD.png",
+    //     group: "Sports",
+    //     tvgId: "TSports.bd@SD",
+    //     language: "Bengali",
+    //     quality: "720p",
+    //     activeUrlIndex: 0,
+    //     urls: [
+    //         "https://tvsen7.aynaott.com/tsports-hd/index.m3u8",
+    //         "https://tvsen7.aynaott.com/tsportsfhd/index.m3u8",
+    //     ],
+    // },
+    // {
+    //     id: "tsn_ocho_ca",
+    //     name: "TSN The Ocho",
+    //     logo: "https://tvpnlogopus.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/CA1400003R3_20240709T002034SQUARE.png",
+    //     group: "Sports",
+    //     tvgId: "TSNTheOcho.ca@SD",
+    //     language: "English",
+    //     quality: "1080p",
+    //     activeUrlIndex: 0,
+    //     urls: [
+    //         "https://d3pnbvng3bx2nj.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-rds8g35qfqrnv/TSN_The_Ocho.m3u8",
+    //     ],
+    // },
+
+
+
+
     // {
     //     id: "fifa_plus_english",
     //     name: "FIFA+",
