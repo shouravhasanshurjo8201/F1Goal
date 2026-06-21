@@ -83,7 +83,7 @@ body {
 .app-layout {
   display: flex;
   flex-direction: column;
-  height: 90vh;
+  height: 100vh;
   overflow: hidden;
 }
 
@@ -96,13 +96,16 @@ body {
   background: var(--bg-surface);
   border-bottom: 1px solid var(--border);
   flex-shrink: 0;
-  z-index: 10;
+  z-index: 50;
+  gap: 16px;
 }
 
 .header-brand {
   display: flex;
   align-items: center;
   gap: 10px;
+  flex-shrink: 0;
+  /* যেন লোগো চ্যাপ্টা না হয়ে যায় */
 }
 
 .brand-icon {
@@ -163,6 +166,16 @@ body {
     opacity: 0.4;
     transform: scale(0.8);
   }
+}
+
+/* ── Right Side Navigation Button Bar ── */
+.group-tabs-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* ── Body ── */
@@ -493,7 +506,6 @@ body {
   align-items: center;
   justify-content: center;
   background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(8px);
   gap: 12px;
   z-index: 2;
 }
@@ -574,10 +586,11 @@ body {
   display: flex;
   gap: 6px;
   margin-left: auto;
-
 }
 
+/* ── Header Active Button Shimmer Effects ── */
 .nav-btn {
+  position: relative;
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 6px;
@@ -587,6 +600,49 @@ body {
   cursor: pointer;
   font-size: 12px;
   transition: all 0.15s ease;
+  overflow: hidden;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav-btn:hover {
+  background: var(--bg-hover);
+}
+
+.nav-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 4px 12px var(--accent-glow);
+}
+
+.shimmer-effect {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.25),
+      transparent);
+  transform: skewX(-20deg);
+  animation: shimmer 2.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -150%;
+  }
+
+  100% {
+    left: 150%;
+  }
+}
+
+.btn-text {
+  position: relative;
+  z-index: 2;
 }
 
 .ctrl-btn {
@@ -744,47 +800,31 @@ body {
   }
 
   .app-header {
-    height: 56px;
-    padding: 0 16px;
+    height: auto;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 12px 16px;
+    gap: 12px;
+  }
+
+  .header-brand {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .group-tabs-nav {
+    width: 100%;
+    justify-content: flex-start;
+    padding-bottom: 4px;
+  }
+
+  .nav-btn {
+    margin-left: 0;
+    margin-right: 8px;
+    flex-shrink: 0;
   }
 
   .brand-title {
     font-size: 20px;
-  }
-}
-
-
-
-
-/* ── Schedule Page Custom Extensions ── */
-
-.scrollbar-none {
-  -ms-overflow-style: none;
-  /* IE and Edge */
-  scrollbar-width: none;
-  /* Firefox */
-}
-
-.scrollbar-none::-webkit-scrollbar {
-  display: none;
-  /* Chrome, Safari and Opera */
-}
-
-.group:hover .group-hover\:border-red-500\/20 {
-  border-color: rgba(239, 68, 68, 0.2) !important;
-}
-
-.group:hover .group-hover\:text-red-500 {
-  color: #ef4444 !important;
-}
-
-.bg-clip-text {
-  -webkit-background-clip: text;
-  background-clip: text;
-}
-
-@media (max-width: 768px) {
-  .main-content {
-    padding-bottom: 80px !important;
   }
 }
