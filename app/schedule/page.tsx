@@ -14,7 +14,20 @@ const SCHEDULE_DATA = [
     { id: 7, date: "SUN Jun 14", time: "01:00 PM", tournament: "FIFA World Cup 2026 - Group E", stage: "Group Stage", teamA: { name: "Germany", flag: "🇩🇪" }, teamB: { name: "Curacao", flag: "🇨🇼" }, status: "FINISHED", score: { teamA: 7, teamB: 1 }, city: "Houston", stadium: "NRG Stadium", channel: "Sony Sports Ten 2", },
     { id: 8, date: "SUN Jun 14", time: "04:00 PM", tournament: "FIFA World Cup 2026 - Group F", stage: "Group Stage", teamA: { name: "Netherlands", flag: "🇳🇱" }, teamB: { name: "Japan", flag: "🇯🇵" }, status: "FINISHED", score: { teamA: 2, teamB: 2 }, city: "Seattle", stadium: "Lumen Field", channel: "Rabbitholebd", },
     { id: 9, date: "SUN Jun 14", time: "07:00 PM", tournament: "FIFA World Cup 2026 - Group E", stage: "Group Stage", teamA: { name: "Ivory Coast", flag: "🇨🇮" }, teamB: { name: "Ecuador", flag: "🇪🇨" }, status: "FINISHED", score: { teamA: 1, teamB: 0 }, city: "Vancouver", stadium: "BC Place", channel: "Sony Sports Ten 1", },
-    { id: 10, date: "SUN Jun 14", time: "10:00 PM", tournament: "FIFA World Cup 2026 - Group F", stage: "Group Stage", teamA: { name: "Sweden", flag: "🇸🇪" }, teamB: { name: "Tunisia", flag: "🇹🇳" }, status: "FINISHED", score: { teamA: 5, teamB: 1 }, city: "San Francisco", stadium: "Levi's Stadium", channel: "Sports 18", }
+    { id: 10, date: "SUN Jun 14", time: "10:00 PM", tournament: "FIFA World Cup 2026 - Group F", stage: "Group Stage", teamA: { name: "Sweden", flag: "🇸🇪" }, teamB: { name: "Tunisia", flag: "🇹🇳" }, status: "FINISHED", score: { teamA: 5, teamB: 1 }, city: "San Francisco", stadium: "Levi's Stadium", channel: "Sports 18", },
+    { id: 11, date: "MON Jun 15", time: "04:00 PM", tournament: "FIFA World Cup 2026 - Group G", stage: "Group Stage", teamA: { name: "Argentina", flag: "🇦🇷" }, teamB: { name: "Australia", flag: "🇦🇺" }, status: "LIVE", score: { teamA: 1, teamB: 0 }, city: "Los Angeles", stadium: "SoFi Stadium", channel: "T Sports", },
+    { id: 12, date: "MON Jun 15", time: "08:00 PM", tournament: "FIFA World Cup 2026 - Group G", stage: "Group Stage", teamA: { name: "Spain", flag: "🇪🇸" }, teamB: { name: "Nigeria", flag: "🇳🇬" }, status: "UPCOMING", score: { teamA: 0, teamB: 0 }, city: "Boston", stadium: "Gillette Stadium", channel: "Sony Sports Ten 2", },
+    { id: 13, date: "TUE Jun 16", time: "02:00 PM", tournament: "FIFA World Cup 2026 - Group H", stage: "Group Stage", teamA: { name: "France", flag: "🇫🇷" }, teamB: { name: "Saudi Arabia", flag: "🇸🇦" }, status: "UPCOMING", score: { teamA: 0, teamB: 0 }, city: "Kansas City", stadium: "Arrowhead Stadium", channel: "Sony Sports Ten 1", },
+    { id: 14, date: "TUE Jun 16", time: "06:00 PM", tournament: "FIFA World Cup 2026 - Group H", stage: "Group Stage", teamA: { name: "England", flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿" }, teamB: { name: "Panama", flag: "🇵🇦" }, status: "UPCOMING", score: { teamA: 0, teamB: 0 }, city: "Philadelphia", stadium: "Lincoln Financial Field", channel: "Fox Sports", },
+    { id: 15, date: "WED Jun 17", time: "03:00 PM", tournament: "FIFA World Cup 2026 - Group A", stage: "Group Stage", teamA: { name: "Mexico", flag: "🇲🇽" }, teamB: { name: "South Korea", flag: "🇰🇷" }, status: "UPCOMING", score: { teamA: 0, teamB: 0 }, city: "Atlanta", stadium: "Mercedes-Benz Stadium", channel: "T Sports", },
+    { id: 16, date: "WED Jun 17", time: "09:00 PM", tournament: "FIFA World Cup 2026 - Group A", stage: "Group Stage", teamA: { name: "Czechia", flag: "🇨🇿" }, teamB: { name: "South Africa", flag: "🇿🇦" }, status: "UPCOMING", score: { teamA: 0, teamB: 0 }, city: "New York", stadium: "MetLife Stadium", channel: "Sports 18", },
+    { id: 17, date: "THU Jun 18", time: "01:00 PM", tournament: "FIFA World Cup 2026 - Group B", stage: "Group Stage", teamA: { name: "Canada", flag: "🇨🇦" }, teamB: { name: "Uruguay", flag: "🇺🇾" }, status: "UPCOMING", score: { teamA: 0, teamB: 0 }, city: "Toronto", stadium: "BMO Field", channel: "Sony Sports Ten 5", },
+    { id: 18, date: "THU Jun 18", time: "07:00 PM", tournament: "FIFA World Cup 2026 - Group B", stage: "Group Stage", teamA: { name: "Croatia", flag: "🇭🇷" }, teamB: { name: "Bosnia and Herzegovina", flag: "🇧🇦" }, status: "UPCOMING", score: { teamA: 0, teamB: 0 }, city: "Vancouver", stadium: "BC Place", channel: "Sony Sports Ten 1", },
+    { id: 19, date: "FRI Jun 19", time: "04:00 PM", tournament: "FIFA World Cup 2026 - Group D", stage: "Group Stage", teamA: { name: "United States", flag: "🇺🇸" }, teamB: { name: "Belgium", flag: "🇧🇪" }, status: "UPCOMING", score: { teamA: 0, teamB: 0 }, city: "San Francisco", stadium: "Levi's Stadium", channel: "Fox Sports", },
+    { id: 20, date: "SAT Jun 20", time: "05:00 PM", tournament: "FIFA World Cup 2026 - Group C", stage: "Group Stage", teamA: { name: "Brazil", flag: "🇧🇷" }, teamB: { name: "Portugal", flag: "🇵🇹" }, status: "UPCOMING", score: { teamA: 0, teamB: 0 }, city: "Miami", stadium: "Hard Rock Stadium", channel: "Sony Sports Ten 2", },
+    { id: 21, date: "SUN Jun 21", time: "02:00 PM", tournament: "FIFA World Cup 2026 - Group E", stage: "Group Stage", teamA: { name: "Germany", flag: "🇩🇪" }, teamB: { name: "Ivory Coast", flag: "🇨🇮" }, status: "UPCOMING", score: { teamA: 0, teamB: 0 }, city: "Dallas", stadium: "AT&T Stadium", channel: "T Sports", },
+    { id: 22, date: "MON Jun 22", time: "06:00 PM", tournament: "FIFA World Cup 2026 - Group F", stage: "Group Stage", teamA: { name: "Netherlands", flag: "🇳🇱" }, teamB: { name: "Sweden", flag: "🇸🇪" }, status: "UPCOMING", score: { teamA: 0, teamB: 0 }, city: "Houston", stadium: "NRG Stadium", channel: "Sony Sports Ten 1", },
+    { id: 23, date: "TUE Jun 23", time: "03:00 PM", tournament: "FIFA World Cup 2026 - Group G", stage: "Group Stage", teamA: { name: "Argentina", flag: "🇦🇷" }, teamB: { name: "Spain", flag: "🇪🇸" }, status: "UPCOMING", score: { teamA: 0, teamB: 0 }, city: "Seattle", stadium: "Lumen Field", channel: "Sports 18", }
 ];
 
 const DAYS = [
@@ -34,6 +47,10 @@ const DAYS = [
     { day: "WED", date: "Jun 24" },
     { day: "THU", date: "Jun 25" },
     { day: "FRI", date: "Jun 26" },
+    { day: "SAT", date: "Jun 27" },
+    { day: "SUN", date: "Jun 28" },
+    { day: "MON", date: "Jun 29" },
+    { day: "TUE", date: "Jun 30" },
 ];
 
 export default function SchedulePage() {
