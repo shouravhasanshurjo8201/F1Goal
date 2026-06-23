@@ -1,46 +1,61 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Calendar, Clock, Tv, ChevronRight, Award, Flame, CheckCircle2 } from "lucide-react";
+import {
+    Calendar,
+    Clock,
+    Tv,
+    ChevronRight,
+    Award,
+    Flame,
+    CheckCircle2,
+} from "lucide-react";
 import styles from "./schedule.module.css";
 
 export default function SchedulePage() {
-    const [selectedDate, setSelectedDate] = useState("THU Jun 11");
-    const [matches, setMatches] = useState([]);
+    const [selectedDate, setSelectedDate] = useState("");
+    const [matches, setMatches] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
 
-    // 🔥 Fetch from API (REAL TIME READY)
     const fetchMatches = async () => {
         try {
+            setLoading(true);
+            setError("");
+
             const res = await fetch("/api/matches");
             const data = await res.json();
+
+            if (!Array.isArray(data)) {
+                setMatches([]);
+                return;
+            }
+
             setMatches(data);
-            setLoading(false);
+
+            if (!selectedDate && data.length > 0) {
+                setSelectedDate(data[0].date);
+            }
         } catch (err) {
-            console.error("Error fetching matches:", err);
+            setError("Failed to load matches");
+        } finally {
             setLoading(false);
         }
     };
 
-    // 🔄 Auto refresh (REAL TIME)
     useEffect(() => {
         fetchMatches();
-
-        const interval = setInterval(() => {
-            fetchMatches(); // every 15 sec update
-        }, 15000);
-
+        const interval = setInterval(fetchMatches, 15000);
         return () => clearInterval(interval);
     }, []);
 
     const filteredMatches = matches.filter(
-        (match) => match.date === selectedDate
+        (match) => match?.date === selectedDate
     );
 
     return (
         <div className={styles.mainContent}>
-
-            {/* Header Section */}
+            {/* Header */}
             <div className={styles.header}>
                 <div className={styles.headerLeft}>
                     <div className={styles.iconWrapper}>
@@ -49,114 +64,90 @@ export default function SchedulePage() {
 
                     <div>
                         <h1 className={styles.title}>Match Schedule</h1>
-                        <p className={styles.subtitle}>
-                            Live FIFA World Cup 2026 Updates ⚽
-                        </p>
+                        <p className={styles.subtitle}>Live Football Updates ⚽</p>
                     </div>
                 </div>
 
                 <div className={styles.badgeCount}>
                     <Flame className="w-4 h-4 text-orange-500" />
-                    <span>Total {filteredMatches.length} Matches Found</span>
+                    <span>Total {filteredMatches.length} Matches</span>
                 </div>
             </div>
 
             {/* Timeline */}
             <div className={styles.timeline}>
-                {[
-                    ...new Set(matches.map(m => m.date))
-                ].map((date, index) => {
-                    const isActive = selectedDate === date;
-
-                    return (
-                        <button
-                            key={index}
-                            onClick={() => setSelectedDate(date)}
-                            className={`${styles.dateBtn} ${isActive ? styles.dateBtnActive : ""}`}
-                        >
-                            <span className={styles.dayLabel}>
-                                {date.split(" ")[0]}
-                            </span>
-                            <span className={styles.dateLabel}>
-                                {date.split(" ")[2]}
-                            </span>
-                        </button>
-                    );
-                })}
+                {[...new Set(matches.map((m) => m.date))].map((date, i) => (
+                    <button
+                        key={i}
+                        onClick={() => setSelectedDate(date)}
+                        className={`${styles.dateBtn} ${selectedDate === date ? styles.dateBtnActive : ""
+                            }`}
+                    >
+                        {date}
+                    </button>
+                ))}
             </div>
 
             {/* Matches */}
             <div className={styles.matchList}>
-
                 {loading ? (
-                    <p style={{ color: "#fff" }}>Loading matches...</p>
-                ) : filteredMatches.length > 0 ? (
-
+                    <p>Loading...</p>
+                ) : error ? (
+                    <p style={{ color: "red" }}>{error}</p>
+                ) : filteredMatches.length === 0 ? (
+                    <p>No matches found</p>
+                ) : (
                     filteredMatches.map((match) => (
                         <div key={match.id} className={styles.matchCard}>
-
-                            {/* Left */}
                             <div className={styles.infoBox}>
                                 <span className={styles.tournamentBadge}>
                                     <Award className="w-3 h-3" />
-                                    {match.tournament}
+                                    {match?.tournament}
                                 </span>
 
                                 <div className={styles.timeBox}>
                                     <Clock className="w-4 h-4" />
-                                    <span className={styles.timeText}>{match.time}</span>
+                                    {match?.time}
                                 </div>
                             </div>
 
-                            {/* Center */}
                             <div className={styles.fixtureBox}>
-
-                                <div className={`${styles.teamSide} ${styles.teamLeft}`}>
-                                    <span className={styles.teamName}>{match.teamA.name}</span>
-                                    <span className={styles.flagBox}>{match.teamA.flag}</span>
+                                <div className={styles.teamSide}>
+                                    <span>{match?.teamA?.name}</span>
+                                    <span>{match?.teamA?.flag}</span>
                                 </div>
 
-                                {match.status === "FINISHED" || match.status === "LIVE" ? (
-                                    <div className={styles.vsBadge} style={{
-                                        display: "flex",
-                                        gap: "8px",
-                                        fontWeight: "900",
-                                        color: match.status === "LIVE" ? "#22c55e" : "#fff"
-                                    }}>
-                                        <span>{match.score?.teamA}</span>
-                                        <span>:</span>
-                                        <span>{match.score?.teamB}</span>
-                                    </div>
-                                ) : (
-                                    <div className={styles.vsBadge}>VS</div>
-                                )}
+                                <div className={styles.vsBadge}>
+                                    {match?.status === "LIVE" ||
+                                        match?.status === "FINISHED" ? (
+                                        <>
+                                            {match?.score?.teamA ?? 0} :{" "}
+                                            {match?.score?.teamB ?? 0}
+                                        </>
+                                    ) : (
+                                        "VS"
+                                    )}
+                                </div>
 
-                                <div className={`${styles.teamSide} ${styles.teamRight}`}>
-                                    <span className={styles.flagBox}>{match.teamB.flag}</span>
-                                    <span className={styles.teamName}>{match.teamB.name}</span>
+                                <div className={styles.teamSide}>
+                                    <span>{match?.teamB?.flag}</span>
+                                    <span>{match?.teamB?.name}</span>
                                 </div>
                             </div>
 
-                            {/* Right */}
                             <div className={styles.actionBox}>
-
                                 <div className={styles.channelBox}>
-                                    <Tv className="w-3.5 h-3.5 text-red-500" />
-                                    <span>{match.channel}</span>
+                                    <Tv className="w-3 h-3" />
+                                    {match?.channel}
                                 </div>
 
                                 <div className={styles.statusWrapper}>
-
-                                    {match.status === "LIVE" ? (
+                                    {match?.status === "LIVE" ? (
                                         <span className={styles.liveBadge}>
-                                            <span className={styles.dot}></span>
                                             LIVE
                                         </span>
-                                    ) : match.status === "FINISHED" ? (
-                                        <span className={styles.upcomingBadge} style={{
-                                            color: "#4ade80",
-                                            background: "rgba(34,197,94,0.1)"
-                                        }}>
+                                    ) : match?.status === "FINISHED" ? (
+                                        <span className={styles.upcomingBadge}>
                                             <CheckCircle2 className="w-3 h-3" />
                                             FINISHED
                                         </span>
@@ -165,25 +156,14 @@ export default function SchedulePage() {
                                             UPCOMING
                                         </span>
                                     )}
-
                                 </div>
 
                                 <ChevronRight className={styles.arrowIcon} />
-
                             </div>
-
                         </div>
                     ))
-
-                ) : (
-                    <div className={styles.emptyState}>
-                        <Calendar className="w-10 h-10" />
-                        <p>No matches found</p>
-                    </div>
                 )}
-
             </div>
-
         </div>
     );
 }
